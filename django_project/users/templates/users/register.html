@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="content-seesion">
+		<form method="POST">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="broder-bottom mb-4" style="padding-top: 30px">馬上註冊</legend>
+				{{ form|crispy }}
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit">註冊</button>
+			</div>
+		</form>
+		<div class="broder-top pt-3">
+			<small class="text-muted">已經有帳號嗎?<a class="ml-2" href="{% url 'login' %}">登入</a></small>
+		</div>
+	</div>
+{% endblock content %}

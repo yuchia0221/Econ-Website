@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+{% block content %}
+	<div class="content-seesion">
+		<form method="POST">
+			{% csrf_token %}
+			<fieldset class="form-group" style="margin-top: 50px">
+				<h3>確定要刪除這篇貼文嗎?</h3>
+			</fieldset>
+			<div class="form-group" style=" margin-top: 20px">
+				<button class="btn btn-outline-danger" type="submit" style="margin-right:10px;">確定</button>
+				<a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}">返回</a>
+			</div>
+		</form>
+	</div>
+{% endblock content %}

@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Kaushan+Script|Noto+Sans+TC:500" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <meta name="google-site-verification" content="2IzPqgF5MOqxQ2PsfqlvkVvwLbFjOROldu-F3jfntg0" />
+        <meta name="msvalidate.01" content="5BC035425FB2E33B0515B68C42B92634" />
+        <meta name="author" content="Aaron Chen & Curtis Luo">
+        <meta name="keywords" content="台大經濟營 台大營隊 營隊 2019台大經濟營">
+        {% if title %}
+            <title>{{ title }} | 2019 台大經濟營</title>
+        {% endif %}
+    </head>
+    
+    <body>
+        <header class="site-header mb-5">
+            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark bg-dark fixed-top">
+                <div class="container">
+                    {% if user.is_authenticated %}
+                        <a class="navbar-brand mb-0 h2" href="{% url 'game' %}">NTU ECON CAMP</a>
+                    {% else %}
+                        <a class="navbar-brand mb-0 h2" href="{% url 'blog-home' %}">NTU ECON CAMP</a>
+                    {% endif %}
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarToggle">
+                        <div class="navbar-nav mr-auto mb-0">
+                            <a class="nav-item nav-link" href="{% url 'blog-home' %}">首頁</a>
+                            <a class="nav-item nav-link" href="{% url 'blog-about' %}">營隊簡介</a>
+                            <a class="nav-item nav-link" href="{% url 'blog-apply' %}">報名方式</a>
+                            <a class="nav-item nav-link" href="{% url 'blog-intro' %}">營隊課程</a>
+                            <a class="nav-item nav-link" href="{% url 'blog-faq' %}">常見問題</a>
+                            <a class="nav-item nav-link" href="{% url 'blog-download' %}">下載專區</a>
+                        </div>
+                        <div class="navbar-nav">
+                            {% if user.is_authenticated %}
+                                <a class="nav-item nav-link" href="{% url 'post-create' %}">新增貼文</a>
+                                <a class="nav-item nav-link" href="{% url 'profile' %}">帳戶資訊</a>
+                                <a class="nav-item nav-link" href="{% url 'logout' %}">登出</a>
+                            {% else %}
+                                <a class="nav-item nav-link" href="{% url 'login' %}">登入</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+        <main role="main" class="container">
+            <div class="row">
+                <div class="col-md-12 justify-content-center">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer>
+            <hr width="100%">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><strong>聯絡我們</strong></h5>
+                        <p>Facebook粉專:&ensp;
+                            <a class="footer-link" href="https://www.facebook.com/2019ntueconcamp/" target="_blank">台大經濟營</a></p>
+                            <br>
+                            <h5><strong>地址</strong></h5>
+                            <p>臺北市大安區羅斯福路四段一號社會科學院&ensp;(靠近辛亥路二段)</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><strong>負責人及電話</strong></h5>
+                            <p>總召:&nbsp蕭宇翔<br>手機：0903389098<br>E-mail：b06303052@ntu.edu.tw</p>
+                            <p>副召:&nbsp杜以謙<br>手機：0988362247<br>E-mail：0523chaf@gmail.com</p>
+                        </div>
+                    </div>
+                    <p class="copyright"><br>Design by Aaron Chen &amp; Curtis Luo<br>Copyright © NTU Econ Camp All Rights Reserved</p>
+                </div>
+            </footer>
+            
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        </body>
+    </html>

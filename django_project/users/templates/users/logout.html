@@ -1,0 +1,11 @@
+{% extends "blog/base.html" %}
+{% block content %}
+	<h3 style="padding-top: 30px">你已成功登出</h3>
+	<div class="broder-top pt-3">
+        <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'login' %}">重新登入</a>
+        	<a class="btn btn-danger btn-sm  mt-1 mb-1" href="{% url 'blog-home' %}">返回首頁</a>
+        	<br><br><br><br><br><br>
+        </div>
+	</div>
+{% endblock content %}
